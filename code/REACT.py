@@ -58,7 +58,7 @@ import wolframalpha
 
 # Import prompts
 from REACT_prompts import prompts_MATH_react,prompt_walpha_context_withthought_REACT,prompt_bing_query_REACT,prompt_bing_answer_extractor
-from demos import prompt_codefixer
+from custom_prompts import prompt_codefixer
 
 
 def build_prompt_for_kr_walpha_sg(question,context):

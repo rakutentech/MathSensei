@@ -411,7 +411,7 @@ def extract_vals(string):
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from utilities import *
-from demos import prompt_codefixer,prompt_bing_answer_extractor, prompt_bing_query,prompt_basc,prompt_kr, prompt_out_type,prompt_pg,prompt_policy,prompt_qg,prompt_pot,prompt_kr_sg,prompt_walpha_kr_sg,prompt_walpha_kr,prompt_kr_pg_sg,prompt_kr_pg,prompt_for_cot,prompt_walpha_context_withthought
+from custom_prompts import prompt_codefixer,prompt_bing_answer_extractor, prompt_bing_query,prompt_basc,prompt_kr, prompt_out_type,prompt_pg,prompt_policy,prompt_qg,prompt_pot,prompt_kr_sg,prompt_walpha_kr_sg,prompt_walpha_kr,prompt_kr_pg_sg,prompt_kr_pg,prompt_for_cot,prompt_walpha_context_withthought
 
 
 class solver:
