@@ -430,6 +430,7 @@ class solver:
         self.api_key = openai.api_key
         self.examples = self.load_data()
         self.modules = []
+        self.cache = {}
 
         if self.knowledge_model == 'llama2_13b':
             # Huggingface login
