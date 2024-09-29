@@ -16,17 +16,17 @@ def parse_args():
 
     # Command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_root', type=str, default='data/MATH')
+    parser.add_argument('--data_root', type=str, default='data/MATH', choices=['data/MATH', 'data/GSM-8K', 'data/AQUA', 'data/MMLU'])
     parser.add_argument('--data_file', type=str, default='no')
-    parser.add_argument('--dataset', type=str, default='MATH')
+    parser.add_argument('--dataset', type=str, default='MATH', choices=['MATH', 'GSM', 'AQUA', 'MMLU'])
     parser.add_argument('--output_root', type=str, default='output_MATHSENSEI')
     parser.add_argument('--model', type=str, default='no', choices=['cot', 'pot','planner','kr_sg','kr_walpha_sg','kr_pg_sg','walpha_sg','pg_sg', 'walpha_pg_sg','walpha_sg','pg_walpha_sg','bing_sg','bing_pg_sg','pg_bing_sg','bing_walpha_sg','walpha_bing_sg','bing_pg_walpha_sg','sg'])
     parser.add_argument('--label', type=str, default='MATHSENSEI_outfile')
-    parser.add_argument('--task_name', type=str, default='math')
-    parser.add_argument('--test_split', type=str, default='minitest', 
+    parser.add_argument('--task_name', type=str, default='math', choices=["math", "gsm", "aqua", "mmlu"])
+    parser.add_argument('--test_split', type=str, default='test', 
                         choices=['train', 'val', 'test', 'minitrain', 'minival', 'minitest'])
 
-    parser.add_argument('--test_number', type=int, default=5000)    # Set to number of example in dataset
+    parser.add_argument('--test_number', type=int, default=None)    # Set to number of example in dataset
     parser.add_argument('--seed', type=int, default=0)
 
     parser.add_argument('--python_model', type=str, default='no', choices=['code_llama7b_python', 'code_llama13b_python','code_davinci002','code_llama34b','wizardcoder_34B','code_llama34b_pythonV1','gemini'])

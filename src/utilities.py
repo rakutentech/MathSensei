@@ -29,7 +29,7 @@ import google.generativeai as genai
 
 
 
-from langchain import LLMChain
+from langchain.chains import LLMChain
 
 # Langchain
 from langchain.chat_models import AzureChatOpenAI
@@ -46,7 +46,6 @@ openai.api_version = os.environ['OPENAI_API_VERSION']
 openai.api_key = os.environ['OPENAI_API_KEY']
 openai.deployment_name = os.environ["OPENAI_DEPLOYMENT_NAME"]
 openai.model_name = os.environ['MODEL_NAME']
-
 
 # Set up Google API Key
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])

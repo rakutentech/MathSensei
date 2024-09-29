@@ -151,7 +151,7 @@ def _strip_string(string):
     
     # remove percentage
     string = string.replace("\\%", "")
-    string = string.replace("\%", "")
+    # string = string.replace("\%", "")
 
     # " 0." equivalent to " ." and "{0." equivalent to "{." Alternatively, add "0" if "." is the start of the string
     string = string.replace(" .", " 0.")
@@ -348,7 +348,7 @@ def extract_last_number(output):
 def get_answer(output, string="The answer is "):
 
     
-    match = re.search('The answer is (\w+)', output)
+    match = re.search('The answer is (\\w+)', output)
     if match:
         predicted_final_answer = (match.group(1))
     else:
@@ -723,44 +723,56 @@ class solver:
             
 
     def load_data(self):
-        
-      
+        examples = []
         if self.dataset == "AQUA":
-            
+            logging.info(f"Dataset: {self.dataset}")
             # Load the JSON data into a list of dictionaries
             examples = read_jsonl_file(os.environ['TEST_AQUA_DATA_FILE_PATH'])
-            logging.info(f"{examples[0]}")
-            logging.info(f"{len(examples)}")
+            logging.info(f"First Sample: {examples[0]}")
+            # logging.info(f"No. of Samples: {len(examples)}")
             logging.info(f"{type(examples)}")
         
         elif self.dataset == "MMLU":
+            logging.info(f"Dataset: {self.dataset}")
             # Load the JSON data into a list of dictionaries
             examples = read_jsonl_file(os.environ['TEST_MMLU_DATA_FILE_PATH'])
-            logging.info(f"{examples[0]}")
-            logging.info(f"{len(examples)}")
+            logging.info(f"First Sample: {examples[0]}")
+            # logging.info(f"No. of Samples: {len(examples)}")
             logging.info(f"{type(examples)}")
 
         elif self.dataset == "GSM":
+            logging.info(f"Dataset: {self.dataset}")
+            # Load the JSON data into a list of dictionaries
             examples = read_jsonl_file(os.environ['TEST_GSM8K_DATA_FILE_PATH'])
-            logging.info(f"{examples[0]}")
-            logging.info(f"{len(examples)}")
+            logging.info(f"First Sample: {examples[0]}")
+            # logging.info(f"No. of Samples: {len(examples)}")
             logging.info(f"{type(examples)}")
           
 
-        else:    # MATH dataset 
-            
+        elif self.dataset == "MATH": 
+            logging.info(f"Dataset: {self.dataset}")
+            # Load the JSON data into a list of dictionaries
             if self.data_file == 'yes':
                 examples = read_jsonl_file(os.environ['MATH_DATA_FILE_PATH'])
             else:    
                 examples = read_jsonl_file(os.environ['SHUFFLED_MATH_DATA_FILE_PATH'])
+            logging.info(f"First Sample: {examples[0]}")
+            logging.info(f"{type(examples)}")
+        else:
+            raise NotImplementedError
+            
 
 
         self.len_examples = len(examples)
         # limit the number of test examples
-        if self.test_number > 0:
-            if self.test_number < self.len_examples:
+        if self.test_number is None:
+            self.test_number = len(examples)
+        else:
+            if self.test_number < len(examples):
                 examples = examples[:self.test_number]
-        
+            elif self.test_number > len(examples):
+                raise Exception("test_number cannot be greater than number of samples!!")
+                
         return examples
 
 
